@@ -1,0 +1,170 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://WallNode.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/1.png" type="Texture" id=2]
+[ext_resource path="res://Player.gd" type="Script" id=3]
+[ext_resource path="res://assets/4.png" type="Texture" id=4]
+[ext_resource path="res://assets/2.png" type="Texture" id=5]
+[ext_resource path="res://assets/3.png" type="Texture" id=6]
+[ext_resource path="res://assets/bg_black.png" type="Texture" id=7]
+[ext_resource path="res://Poppins-Bold.otf" type="DynamicFontData" id=8]
+
+[sub_resource type="DynamicFont" id=5]
+size = 19
+use_filter = true
+font_data = ExtResource( 8 )
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 48.0
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "fly",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 49, 43.75 )
+
+[node name="World" type="Node2D"]
+position = Vector2( -8, -12 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enable = true
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+margin_left = 160.0
+margin_top = 24.0
+margin_right = 248.0
+margin_bottom = 51.0
+custom_fonts/font = SubResource( 5 )
+
+[node name="PlayerNode" type="Node2D" parent="."]
+position = Vector2( -3, 274 )
+
+[node name="Player" type="KinematicBody2D" parent="PlayerNode"]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNode/Player"]
+position = Vector2( 83, 42 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="AnimatedSprite" parent="PlayerNode/Player"]
+position = Vector2( 83, 47 )
+scale = Vector2( 0.144624, 0.160553 )
+frames = SubResource( 3 )
+animation = "fly"
+
+[node name="Detect" type="Area2D" parent="PlayerNode/Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNode/Player/Detect"]
+position = Vector2( 83, 42 )
+shape = SubResource( 4 )
+
+[node name="WallNode" parent="." instance=ExtResource( 1 )]
+position = Vector2( 792, 292 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="WallNode2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1344, 420 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="WallNode3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 2392, 292 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="WallNode4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1872, 348 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="WallNode5" parent="." instance=ExtResource( 1 )]
+position = Vector2( 2864, 420 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="WallNode6" parent="." instance=ExtResource( 1 )]
+position = Vector2( 3240, 284 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="WallNode7" parent="." instance=ExtResource( 1 )]
+position = Vector2( 3640, 348 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="WallNode8" parent="." instance=ExtResource( 1 )]
+position = Vector2( 4024, 428 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="WallNode9" parent="." instance=ExtResource( 1 )]
+position = Vector2( 4424, 300 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="WallNode10" parent="." instance=ExtResource( 1 )]
+position = Vector2( 4776, 388 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="WallNode11" parent="." instance=ExtResource( 1 )]
+position = Vector2( 5040, 260 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="WallNode12" parent="." instance=ExtResource( 1 )]
+position = Vector2( 5248, 396 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="WallNode13" parent="." instance=ExtResource( 1 )]
+position = Vector2( 5416, 240 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="WallNode14" parent="." instance=ExtResource( 1 )]
+position = Vector2( 5592, 348 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="WallNode15" parent="." instance=ExtResource( 1 )]
+position = Vector2( 5760, 220 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 80, 321 )
+zoom = Vector2( 1, 2 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 200, 351 )
+scale = Vector2( 1.06667, 1.05247 )
+texture = ExtResource( 7 )
+
+[connection signal="area_entered" from="PlayerNode/Player/Detect" to="PlayerNode/Player" method="_on_Detect_area_entered"]
+[connection signal="body_entered" from="PlayerNode/Player/Detect" to="PlayerNode/Player" method="_on_Detect_body_entered"]
